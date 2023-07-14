@@ -20,8 +20,8 @@ def splitBedpe(bedpe,tmp1="tmp1.bed",tmp2="tmp2.bed",header="F",verbose="F"):
 	for l in bedpein:
 		name += 1
 		e = l.strip().split("\t")
-		print >> t1, "\t".join(e[0:3] + ['name'+str(name)] + [e[6]])
-		print >> t2, "\t".join(e[3:6] + ['name'+str(name)] + [e[6]])
+		print("\t".join(e[0:3] + ['name'+str(name)]), file=t1)
+		print("\t".join(e[3:6] + ['name'+str(name)]), file=t2)
 		
 	t1.close()
 	t2.close()
@@ -32,9 +32,9 @@ def splitBedpe(bedpe,tmp1="tmp1.bed",tmp2="tmp2.bed",header="F",verbose="F"):
 def doliftOver(liftOver,chain,infile,verbose="F"):
 	
 	cmd = " ".join([liftOver,infile,chain,infile + ".success",infile + ".failure"])
-	print cmd
+	print(cmd)
 	if verbose == "T":
-		print cmd
+		print(cmd)
 	os.system(cmd)
 	
 
@@ -58,7 +58,7 @@ def mergeliftOver(f1,f2,outputfile,verbose="F"):
 		if e[3] in readdict:
 			r1 = readdict[e[3]]
 			r2 = e
-			print >>o, "\t".join(r1[:3] + r2[:3] + [r2[4]])
+			print("\t".join(r1[:3] + r2[:3]), file=o)
 	f.close()
 	o.close()
 
@@ -116,24 +116,3 @@ os.remove(tmp1+".success")
 os.remove(tmp1+".failure")
 os.remove(tmp2+".success")
 os.remove(tmp2+".failure")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
